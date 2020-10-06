@@ -1,0 +1,28 @@
+#!/bin/bash
+#BSUB -q cpupub
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -J ml
+#BSUB -n 24
+##BSUB -R "span[ptile=12]"
+#BSUB -R "span[hosts=1]"
+
+#source /share/apps/intel/ipsxe2016/parallel_studio_xe_2016.0.047/psxevars.sh >/dev/null 2>&1
+source /share/apps/intel/ipsxe2015u5/parallel_studio_xe_2015/psxevars.sh >/dev/null 2>&1
+
+export OMP_NUM_THREADS=1
+export PATH=/share/apps/Anaconda/bin:$PATH
+#export PATH=~/apps/anaconda3/bin:$PATH
+
+#for i in $(ls -d */)
+#do
+  
+#  cd $i
+  
+     mpirun python rbf_parallel.py
+    
+	wait
+	
+#  cd ../
+
+#done

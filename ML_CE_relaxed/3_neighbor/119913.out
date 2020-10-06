@@ -1,0 +1,65 @@
+Sender: LSF System <lsfadmin@cpu29>
+Subject: Job 119913: <3> in cluster <platform> Done
+
+Job <3> was submitted from host <mgt02> by user <fengkangli> in cluster <platform>.
+Job was executed on host(s) <24*cpu29>, in queue <cliu>, as user <fengkangli> in cluster <platform>.
+</share/home/fengkangli> was used as the home directory.
+</share/home/fengkangli/ml/3_neighbor> was used as the working directory.
+Started at Fri Nov  1 23:01:42 2019
+Results reported on Mon Nov  4 07:35:25 2019
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -q cliu
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -J 3
+#BSUB -n 24
+##BSUB -R "span[ptile=12]"
+#BSUB -R "span[hosts=1]"
+
+#source /share/apps/intel/ipsxe2016/parallel_studio_xe_2016.0.047/psxevars.sh >/dev/null 2>&1
+source /share/apps/intel/ipsxe2015u5/parallel_studio_xe_2015/psxevars.sh >/dev/null 2>&1
+
+export OMP_NUM_THREADS=1
+export PATH=/share/apps/Anaconda/bin:$PATH
+#export PATH=~/apps/anaconda3/bin:$PATH
+
+for i in $(ls -d */)
+  do
+    cd $i
+    for j in $(ls -d */)
+	  do
+	    cd $j
+		mpirun python rbf_parallel.py
+        wait
+	    cd ../
+	  done
+    cd ../
+  done
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   4883849.00 sec.
+    Max Memory :                                 5049 MB
+    Average Memory :                             3141.88 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              30
+    Max Threads :                                31
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <119913.err> for stderr output of this job.
+

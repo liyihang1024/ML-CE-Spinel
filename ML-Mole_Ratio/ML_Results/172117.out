@@ -1,0 +1,65 @@
+Sender: LSF System <lsfadmin@cpu30>
+Subject: Job 172117: <ml> in cluster <platform> Done
+
+Job <ml> was submitted from host <mgt02> by user <liyihang> in cluster <platform>.
+Job was executed on host(s) <24*cpu30>, in queue <cpupub>, as user <liyihang> in cluster <platform>.
+</share/home/liyihang> was used as the home directory.
+</share/home/liyihang/ml_mole_ratio> was used as the working directory.
+Started at Sun Oct  4 21:02:43 2020
+Results reported on Sun Oct  4 22:29:09 2020
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#!/bin/bash
+#BSUB -q cpupub
+#BSUB -o %J.out
+#BSUB -e %J.err
+#BSUB -J ml
+#BSUB -n 24
+##BSUB -R "span[ptile=12]"
+#BSUB -R "span[hosts=1]"
+
+#source /share/apps/intel/ipsxe2016/parallel_studio_xe_2016.0.047/psxevars.sh >/dev/null 2>&1
+source /share/apps/intel/ipsxe2015u5/parallel_studio_xe_2015/psxevars.sh >/dev/null 2>&1
+
+export OMP_NUM_THREADS=1
+export PATH=/share/apps/Anaconda/bin:$PATH
+#export PATH=~/apps/anaconda3/bin:$PATH
+
+#for i in $(ls -d */)
+#do
+  
+#  cd $i
+  
+     mpirun python rbf_parallel.py
+    
+	wait
+	
+#  cd ../
+
+#done
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   123881.46 sec.
+    Max Memory :                                 4102 MB
+    Average Memory :                             3724.46 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Processes :                              30
+    Max Threads :                                31
+
+The output (if any) follows:
+
+
+
+PS:
+
+Read file <172117.err> for stderr output of this job.
+
